@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { addUser } from './components/AddUser.js';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      {/* Test button to try adding a user */}
+      <button onClick={addUser}>Add user</button>
     </>
   )
 }
