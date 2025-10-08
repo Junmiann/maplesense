@@ -1,6 +1,7 @@
 export type Note = {
     id: number;
+    sectionId: number;
     title: string;
-    writtenByUser: number;
+    writtenBy: number;
     note: string;
 }
