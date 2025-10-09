@@ -1,6 +1,7 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
 import type { User } from "../types/user.js";
+import pool from "../db.js";
 
 const router = Router();
 
@@ -9,8 +10,15 @@ const users: User[] = [
   { id: 2, firstName: "Bob", lastName: "McKnight", groupId: 19 },
 ];
 
-router.get("/", (req: Request, res: Response) => {
-    res.json(users);
+/* TEST: will probably be changed onwards */
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query("SELECT * FROM users");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching users:", err);
+    res.status(500).json({ error: "Could not fetch users" });
+  }
 });
 
 router.post("/", (req: Request, res: Response) => {
