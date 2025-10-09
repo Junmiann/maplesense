@@ -31,8 +31,6 @@ router.post("/register", async (req: Request, res: Response) => {
         [firstName, lastName, groupId]
     );
 
-    console.log(userResult.rows[0]);
-
     const userId = userResult.rows[0].id;
 
     await client.query(
