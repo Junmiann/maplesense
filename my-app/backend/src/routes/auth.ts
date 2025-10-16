@@ -37,6 +37,10 @@ router.post("/register", async (req: Request, res: Response) => {
   const client = await pool.connect();
 
   try {
+    if (![firstName, lastName, email, password].every(Boolean)) {
+      return res.status(400).json({ error: "All fields must be filled in" });
+    }
+
     const groupIdResult = await client.query("SELECT id FROM groups WHERE id = $1", [groupId]);
     if (groupIdResult.rowCount === 0) {
       return res.status(400).json({ error: "Group ID does not exist" });

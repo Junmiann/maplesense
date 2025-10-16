@@ -1,4 +1,4 @@
 export type Section = {
-    id: number;
     title: string;
+    groupId: string;
 };
