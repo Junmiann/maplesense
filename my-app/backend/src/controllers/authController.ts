@@ -5,9 +5,9 @@ import type { User } from "../types/user.js";
 export const login = async (req: Request, res: Response) => {
     try {
         const user = await authService.authenticateUser(req.body.email, req.body.password);
-        res.status(200).json({ user });
+        res.status(200).json({ user, message: "User successfully logged in:" });
     } catch (error) {
-        res.status(401).json({ error: (error as Error).message });
+        res.status(401).json({ error: "Invalid email or password." });
     }
 };
 
