@@ -30,7 +30,9 @@ export default function LoginForm() {
             return;
         }
 
-        console.log(data.message, data.user);
+        console.log(data.message);
+
+        localStorage.setItem("token", data.token);
         navigate("/home");
 
         } catch (error) {
