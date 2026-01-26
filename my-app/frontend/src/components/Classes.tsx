@@ -2,18 +2,29 @@ import { useState, useEffect } from "react";
 import type { Class } from "../types";
 import JobsFilter from "./filters/JobsFilter";
 import { type Job } from "../constants/jobs";
+import { type Origin } from "../constants/origins";
+import OriginFilter from "./filters/OriginsFilter";
 
 export default function Classes() {
     const [classes, setClasses] = useState<Class[]>([]);
     const [job, setJob] = useState<Job>("all");
+    const [origin, setOrigin] = useState<Origin>("explorer");
+
+    const [activeFilter, setActiveFilter] = useState<"job" | "origin">("job");
 
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const url =
-                    job === "all"
-                        ? "http://localhost:5000/classes"
-                        : `http://localhost:5000/classes/job?name=${job}`;
+                let url = "http://localhost:5000/classes";
+
+                if (activeFilter === "job") {
+                    url =
+                        job === "all"
+                            ? "http://localhost:5000/classes"
+                            : `http://localhost:5000/classes/job?name=${job}`;
+                } else if (activeFilter === "origin") {
+                    url = `http://localhost:5000/classes/origin?name=${origin}`;
+                }
 
                 const response = await fetch(url, {
                     method: "GET",
@@ -37,14 +48,22 @@ export default function Classes() {
         };
 
         fetchClasses();
-    }, [job]);
+    }, [activeFilter, job, origin]);
 
     return (
         <div>
             <h1>Classes</h1>
 
-            {/* Job filter */}
-            <JobsFilter activeJob={job} onChange={setJob} />
+            <button onClick={() => setActiveFilter("job")}>Jobs</button>
+            <button onClick={() => setActiveFilter("origin")}>Origin</button>
+
+            {/* Show fiter based on active filter */}
+            {activeFilter === "job" && (
+                <JobsFilter activeJob={job} onChange={setJob} />
+            )}
+            {activeFilter === "origin" && (
+                <OriginFilter activeOrigin={origin} onChange={setOrigin} />
+            )}
 
             {/* Classes list */}
             {classes.length === 0 ? (
