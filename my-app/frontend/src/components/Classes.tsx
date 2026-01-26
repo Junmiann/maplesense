@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import type { Class } from "../types";
 import JobsFilter from "./filters/JobsFilter";
 import { type Job } from "../constants/jobs";
@@ -76,13 +77,15 @@ export default function Classes() {
             )}
 
             {/* Classes list */}
-            {classes.length === 0 ? (
-                <p>Loading classes...</p>
-            ) : (
-                classes.map((cls) => (
-                    <div key={cls.id}>{cls.name}</div>
-                ))
-            )}
+            {classes.map((cls) => (
+                <Link
+                    key={cls.id}
+                    to={`/classes/${cls.id}`}
+                    style={{ display: "block" }}
+                >
+                    {cls.name}
+                </Link>
+            ))}
         </div>
     );
 }
