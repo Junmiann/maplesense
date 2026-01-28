@@ -1,4 +1,17 @@
 services:
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    
   backend:
     build:
       context: ./backend
@@ -10,6 +23,8 @@ services:
       - ./backend:/app
       - /app/node_modules
       - /app/dist
+    depends_on:
+      - db
 
   frontend:
     build:
