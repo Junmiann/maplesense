@@ -64,17 +64,36 @@ export default function Classes() {
     return (
         <div>
             <h1>Classes</h1>
-
-            <button onClick={() => handleFilterSwitch("job")}>Jobs</button>
-            <button onClick={() => handleFilterSwitch("origin")}>Origin</button>
-
-            {/* Show fiter based on active filter */}
-            {activeFilter === "job" && (
-                <JobsFilter activeJob={job} onChange={setJob} />
-            )}
-            {activeFilter === "origin" && (
-                <OriginFilter activeOrigin={origin} onChange={setOrigin} />
-            )}
+            <div className="flex gap-6 justify-end border-b border-white/20">
+                <button onClick={() => handleFilterSwitch("job")} 
+                    className={`pb-2 transition 
+                        ${activeFilter === "job"
+                            ? "font-semibold border-b-2 border-white"
+                            : "text-white/60 hover:text-white"
+                        }`}>
+                            Jobs
+                </button>
+                <button onClick={() => handleFilterSwitch("origin")} 
+                    className={`pb-2 transition 
+                        ${activeFilter === "origin"
+                            ? "font-semibold border-b-2 border-white"
+                            : "text-white/60 hover:text-white"
+                        }`}>
+                            Origin
+                </button>
+            </div>
+            
+            <div className="pt-4 pb-4">
+                {/* Show fiter based on active filter */}
+                {activeFilter === "job" && (
+                    <JobsFilter activeJob={job} onChange={setJob} />
+                )}
+                
+                {activeFilter === "origin" && (
+                    <OriginFilter activeOrigin={origin} onChange={setOrigin} />
+                )}
+            </div>
+            
 
             {/* Classes list */}
             {classes.map((cls) => (

@@ -10,17 +10,17 @@ export default function JobsFilter({
     onChange,
 }: JobsFilterProps) {
     return (
-        <div>
+        <div className="border-b border-white/20">
             {JOBS.map((job) => (
                 <button
                     key={job}
                     onClick={() => onChange(job)}
-                    style={{
-                        marginRight: "0.5rem",
-                        fontWeight: activeJob === job ? "bold" : "normal",
-                    }}
-                >
-                    {job.toUpperCase()}
+                    className={`pb-2 mr-6 transition
+                        ${activeJob === job
+                            ? "font-semibold border-b-2 border-white"
+                            : "text-white/60 hover:text-white"
+                        }`}>
+                            {job.toUpperCase()}
                 </button>
             ))}
         </div>
