@@ -17,7 +17,11 @@ export async function selectedJob(jobName: string) {
 
     try {
         const selectedJobResult = await client.query(
-            ` SELECT * FROM classes WHERE LOWER($1) = ANY (SELECT LOWER(x) FROM unnest(job) AS x`,
+            `SELECT * FROM classes c WHERE EXISTS (
+                SELECT 1
+                FROM unnest(c.job) AS x
+                WHERE LOWER(x) = LOWER($1)
+            );`,
             [jobName]
         );
 
