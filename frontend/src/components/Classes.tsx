@@ -62,9 +62,9 @@ export default function Classes() {
     }, [activeFilter, job, origin]);
 
     return (
-        <div>
-            <h1>Classes</h1>
-            <div className="flex gap-6 justify-end border-b border-white/20">
+        <div className="flex flex-col max-w-6xl m-6 mx-auto">
+            <h1 className="font-bold uppercase">Classes</h1>
+            <div className="flex justify-end gap-6 border-b border-white/20">
                 <button onClick={() => handleFilterSwitch("job")} 
                     className={`pb-2 transition 
                         ${activeFilter === "job"
@@ -96,15 +96,15 @@ export default function Classes() {
             
 
             {/* Classes list */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
                 {classes.map((cls) => (
                     <Link
                         key={cls.id}
                         to={`/classes/${cls.id}`}
-                        className="group flex flex-col items-center p-4 rounded-lg gap-2 border border-white/5 hover:bg-white/5 transition">
+                        className="flex flex-col items-center gap-2 p-4 transition border rounded-lg group border-white/5 hover:bg-white/5">
                             <img src={cls.image_url} alt={cls.name} 
                                 className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#794CA6]"/>
-                            <p className="text-sm md:text-base lg:text-lg border-t border-white/20">{cls.name}</p> 
+                            <p className="text-sm border-t md:text-base lg:text-lg border-white/20">{cls.name}</p> 
                     </Link>
                 ))}
             </div>

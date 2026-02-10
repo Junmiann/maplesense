@@ -42,16 +42,20 @@ export default function Character() {
     }
 
     return (
-        <div className="flex flex-col max-w-6xl mx-auto p-4">
-            <Link to="/classes" className="flex justify-start">Back to classes</Link>
-            <div className="flex justify-center items-center gap-20">
+        <div className="flex flex-col max-w-4xl p-4 m-10 mx-auto rounded bg-white/10">
+            <Link to="/classes" className="flex justify-start w-8">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </Link>
+            <div className="flex items-center justify-between">
                 {/* Character information */}
-                <div>
-                    <h1 className="uppercase font-bold">{character.name}</h1>
-                    <p className="justify-center text-xl uppercase font-semibold mb-4">{character.job.join(", ")} | {character.origin}</p>
-                    <div className="flex flex-col w-lg max-w-lg mb-2 gap-4 text-start">
-                        <p className="bg-white/20 rounded-full p-2 pl-5"><span className="uppercase font-bold">Primary weapon:</span>{" "}{character.primary_weapon.join(", ")}</p>
-                        <p className="bg-white/20 rounded-full p-2 pl-5"><span className="uppercase font-bold">Secondary weapon:</span>{" "}{character.secondary_weapon.join(", ")}</p>
+                <div className="w-2/3 p-4">
+                    <h1 className="mb-2 font-bold uppercase">{character.name}</h1>
+                    <p className="justify-center mb-4 text-xl uppercase">{character.job.join(", ")} | {character.origin}</p>
+                    <div className="flex flex-col max-w-lg gap-4 mb-2 w-lg text-start">
+                        <p className="p-2 pl-5 rounded-full bg-white/20"><span className="font-bold uppercase">Primary weapon:</span>{" "}{character.primary_weapon.join(", ")}</p>
+                        <p className="p-2 pl-5 rounded-full bg-white/20"><span className="font-bold uppercase">Secondary weapon:</span>{" "}{character.secondary_weapon.join(", ")}</p>
                     </div>
                     <div>
                         <p>Difficulty: {character.difficulty}</p>
@@ -59,7 +63,7 @@ export default function Character() {
                         <p>Range: {character.range}</p>
                     </div>
                 </div>
-                <img src={character.image_url} alt={character.name} className="w-90 flex-shrink"/>
+                <img src={character.image_url} alt={character.name} />
             </div>
         </div>
     );

@@ -7,10 +7,11 @@ import Character from "./components/Character.js";
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-          <Link to="/">Home</Link>
-          <Link to="/Classes">Classes</Link>
+      <nav className="flex items-center justify-center h-12 mb-8 uppercase bg-white/10">
+          <Link to="/" className="p-3 m-4">Home</Link>
+          <Link to="/Classes" className="p-3 m-4">Classes</Link>
       </nav>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/classes" element={<Classes />} />
