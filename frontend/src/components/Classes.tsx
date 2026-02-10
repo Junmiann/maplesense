@@ -69,7 +69,7 @@ export default function Classes() {
                     className={`pb-2 transition 
                         ${activeFilter === "job"
                             ? "font-semibold border-b-2 border-white"
-                            : "text-white/60 hover:text-white"
+                            : "text-white/60 hover:text-[#B1E1E9] hover:font-bold"
                         }`}>
                             Jobs
                 </button>
@@ -77,7 +77,7 @@ export default function Classes() {
                     className={`pb-2 transition 
                         ${activeFilter === "origin"
                             ? "font-semibold border-b-2 border-white"
-                            : "text-white/60 hover:text-white"
+                            : "text-white/60 hover:text-[#B1E1E9] hover:font-bold"
                         }`}>
                             Origin
                 </button>
@@ -101,9 +101,9 @@ export default function Classes() {
                     <Link
                         key={cls.id}
                         to={`/classes/${cls.id}`}
-                        className="flex flex-col items-center gap-2 p-4 transition border rounded-lg group border-white/5 hover:bg-white/5">
+                        className="flex flex-col items-center gap-2 p-4 transition border rounded-lg group border-white/5 bg-white/5">
                             <img src={cls.image_url} alt={cls.name} 
-                                className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#794CA6]"/>
+                                className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#B1E1E9]"/>
                             <p className="text-sm border-t md:text-base lg:text-lg border-white/20">{cls.name}</p> 
                     </Link>
                 ))}
