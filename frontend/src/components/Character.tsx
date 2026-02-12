@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import type { Class } from "../types";
-import StatBar from "../components/statBar";
+import StatBar from "../components/StatBar";
 
 export default function Character() {
     const { id } = useParams();
