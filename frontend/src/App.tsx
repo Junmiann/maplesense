@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
-import Classes from "./components/Classes.js";
+import Classes from "../src/components/classes/Classes.js";
 import Home from './components/Home.js';
-import Character from "./components/Character.js";
+import Character from "./components/character/Character.js";
 
 function App() {
   return (

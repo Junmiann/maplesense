@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import type { Class } from "../types";
-import JobsFilter from "./filters/JobsFilter";
-import { type Job } from "../constants/jobs";
-import { type Origin } from "../constants/origins";
-import OriginFilter from "./filters/OriginsFilter";
+import type { Class } from "../../types";
+import JobsFilter from "../classes/JobsFilter";
+import { type Job } from "../../constants/jobs";
+import { type Origin } from "../../constants/origins";
+import OriginFilter from "../classes/OriginsFilter";
 
 export default function Classes() {
     const [classes, setClasses] = useState<Class[]>([]);
