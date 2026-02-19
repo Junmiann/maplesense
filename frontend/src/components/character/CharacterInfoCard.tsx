@@ -9,7 +9,7 @@ export default function CharacterInfoCard({character}: Props) {
     return (
         <>
             {/* Character information */}
-            <div className="flex flex-col justify-center w-2/5 p-8 overflow-hidden rounded-xl bg-gradient-to-t from-[#315965] to-[#8EB3BE]/60 border-2 border-white/40">
+            <div className="flex flex-col justify-center md:w-3/5 lg:w-2/5 p-8 overflow-hidden rounded-xl bg-gradient-to-t from-[#315965] to-[#8EB3BE]/60 border-2 border-white/40">
                 <h1 className="text-[40px] mb-2 uppercase drop-shadow-[2px_4px_2px_#315965] bg-gradient-to-t from-[#8EB3BE] to-[#F5F7FA] bg-clip-text text-transparent">{character.name}</h1>
                 <p className="mb-6 text-lg uppercase border-b-2 border-white/20 opacity-80">{character.job.join(", ")} | {character.origin}</p>
 
