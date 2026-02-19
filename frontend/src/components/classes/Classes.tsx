@@ -59,8 +59,8 @@ export default function Classes() {
     }, [activeFilter, job, origin]);
 
     return (
-        <div className="flex flex-col max-w-6xl mx-auto mt-20 mb-6">
-            <h1 className="uppercase text-start">Classes</h1>
+        <div className="w-[90%] flex flex-col max-w-xl mx-auto mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
+            <h1 className="text-center uppercase md:text-start">Classes</h1>
 
             <ClassesFilters
                 activeFilter={activeFilter}
@@ -77,7 +77,7 @@ export default function Classes() {
                     <Link
                         key={cls.id}
                         to={`/classes/${cls.id}`}
-                        className="flex flex-col items-center gap-2 p-4 transition border rounded-lg group border-white/5 bg-white/5">
+                        className="flex flex-col items-center gap-2 transition border rounded-lg lg:p-4 group border-white/5 bg-white/5">
                             <img src={cls.image_url} alt={cls.name} 
                                 className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#B1E1E9]"/>
                             <p className="text-sm border-t md:text-base lg:text-lg border-white/20">{cls.name}</p> 
