@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import type { Class } from "../../types";
 import { type Job } from "../../constants/jobs";
 import { type Origin } from "../../constants/origins";
@@ -13,25 +13,35 @@ function buildUrl(activeFilter: FilterMode, job: Job, origin: Origin) {
     if (activeFilter === "job") {
         return job === "all" 
         ? baseUrl
-        : `${baseUrl}/job?name=${job}`;
+        : `${baseUrl}?job=${job}`;
     }
 
-    return `${baseUrl}/origin?name=${origin}`;
+    return `${baseUrl}?origin=${origin}`;
 }
 
 export default function Classes() {
     const [classes, setClasses] = useState<Class[]>([]);
-    const [job, setJob] = useState<Job>("all");
-    const [origin, setOrigin] = useState<Origin>("explorer");
+    const [searchParams, setSearchParams] = useSearchParams();
+    
+    const job = (searchParams.get("job") as Job) || "all";
+    const origin = (searchParams.get("origin") as Origin) || "explorer";
     const [activeFilter, setActiveFilter] = useState<FilterMode>("job");
 
     const handleFilterSwitch = (filter: FilterMode) => {
         setActiveFilter(filter);
         if (filter === "job") {
-            setJob("all");
+            setSearchParams({job: "all"});
         } else {
-            setOrigin("explorer"); 
+            setSearchParams({origin: "explorer"});
         }
+    };
+
+    const setJob = (nextJob: Job) => {
+        setSearchParams({ job: nextJob });
+    };
+
+    const setOrigin = (nextOrigin: Origin) => {
+        setSearchParams({ origin: nextOrigin });
     };
 
     useEffect(() => {
