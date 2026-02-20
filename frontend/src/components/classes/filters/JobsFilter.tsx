@@ -1,4 +1,4 @@
-import { JOBS, type Job } from '../../constants/jobs';
+import { JOBS, type Job } from '../../../constants';
 
 type JobsFilterProps = {
     activeJob: Job;

@@ -1,7 +1,6 @@
 import JobsFilter from "./JobsFilter";
 import OriginFilter from "./OriginsFilter";
-import { type Job } from "../../constants/jobs";
-import { type Origin } from "../../constants/origins";
+import type { Job, Origin } from "../../../constants";
 
 type FilterMode = "job" | "origin";
 

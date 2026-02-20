@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 import type { Class } from "../../types";
-import { type Job } from "../../constants/jobs";
-import { type Origin } from "../../constants/origins";
-import ClassesFilters from "./ClassesFilters";
+import type { Job, Origin } from "../../constants";
+import ClassesFilters from "./filters/ClassesFilters";
 
 type FilterMode = "job" | "origin";
 
-function buildUrl(activeFilter: FilterMode, job: Job, origin: Origin) {
+function newUrl(searchParams: URLSearchParams) {
     const baseUrl = "http://localhost:5000/classes";
-
-    if (activeFilter === "job") {
-        return job === "all" 
-        ? baseUrl
-        : `${baseUrl}?job=${job}`;
-    }
-
-    return `${baseUrl}?origin=${origin}`;
+    const query = searchParams.toString();
+    return query ? `${baseUrl}?${query}` : baseUrl;
 }
 
 export default function Classes() {
+    const location = useLocation();
+    
     const [classes, setClasses] = useState<Class[]>([]);
     const [searchParams, setSearchParams] = useSearchParams();
     
@@ -27,47 +22,66 @@ export default function Classes() {
     const origin = (searchParams.get("origin") as Origin) || "explorer";
     const [activeFilter, setActiveFilter] = useState<FilterMode>("job");
 
+    const sort = searchParams.get("sort");
+    const order = searchParams.get("order");
+
+    const sortOrder: "asc" | "desc" | "none" = 
+        sort === "difficulty" && (order === "asc" || order === "desc") 
+        ? order 
+        : "none";
+    
     const handleFilterSwitch = (filter: FilterMode) => {
         setActiveFilter(filter);
         if (filter === "job") {
-            setSearchParams({job: "all"});
+            updateSearchParams({
+                origin: null,
+                job: null
+            });
         } else {
-            setSearchParams({origin: "explorer"});
+            updateSearchParams({
+                job: null,
+                origin: "explorer"
+            });
         }
     };
 
     const setJob = (nextJob: Job) => {
-        setSearchParams({ job: nextJob });
+        updateSearchParams({
+            origin: null,
+            job: nextJob === "all" ? null : nextJob
+        });
     };
 
     const setOrigin = (nextOrigin: Origin) => {
-        setSearchParams({ origin: nextOrigin });
+        updateSearchParams({ 
+            job: null,
+            origin: nextOrigin
+        });
+    };
+
+    const updateSearchParams = (patch: Record<string, string | null>) => {
+        setSearchParams((prev) => {
+        const next = new URLSearchParams(prev);
+
+        for (const [key, value] of Object.entries(patch)) {
+            if (value === null) next.delete(key);
+            else next.set(key, value);
+        }
+
+        return next;
+        });
     };
 
     useEffect(() => {
         const fetchClasses = async () => {
-        try {
-            const url = buildUrl(activeFilter, job, origin);
-            const response = await fetch(url);
-            const data = await response.json();
+        const url = newUrl(searchParams);
+        const response = await fetch(url);
+        const data = await response.json();
+        setClasses(data);
+    };
 
-            if (!response.ok || data?.error) {
-                console.error({ 
-                    status: response.status, 
-                    data: data.error 
-                });
-                return;
-            }
-
-            setClasses(data);
-        } catch (error) {
-            console.error(error);
-        }
-        };
-
-        fetchClasses();
-    }, [activeFilter, job, origin]);
-
+  fetchClasses();
+}, [searchParams]);
     return (
         <div className="w-[90%] flex flex-col max-w-xl mx-auto mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
             <h1 className="text-center uppercase md:text-start">Classes</h1>
@@ -80,6 +94,27 @@ export default function Classes() {
                 origin={origin}
                 setOrigin={setOrigin}
             />
+
+            {/* Sort-element */}
+            <div className="flex justify-end mb-4">
+                <select
+                    value={sortOrder}
+                    onChange={(e) => {
+                        const next = e.target.value as "asc" | "desc" | "none";
+
+                        if (next === "none") {
+                        updateSearchParams({ sort: null, order: null });
+                        } else {
+                        updateSearchParams({ sort: "difficulty", order: next });
+                        }
+                    }}
+                    className="px-3 py-1 text-sm border rounded-md bg-white/10 border-white/20"
+                    >
+                        <option value="none" className="text-[#2b2b2b]">Sort by Difficulty</option>
+                        <option value="asc" className="text-[#2b2b2b]">Low to High</option>
+                        <option value="desc" className="text-[#2b2b2b]">High to Low</option>
+                    </select>
+            </div>
             
             {/* Classes list */}
             <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
@@ -87,6 +122,7 @@ export default function Classes() {
                     <Link
                         key={cls.id}
                         to={`/classes/${cls.id}`}
+                        state={{ from: `${location.pathname}${location.search}` }}
                         className="flex flex-col items-center gap-2 transition border rounded-lg lg:p-4 group border-white/5 bg-white/5">
                             <img src={cls.image_url} alt={cls.name} 
                                 className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#B1E1E9]"/>

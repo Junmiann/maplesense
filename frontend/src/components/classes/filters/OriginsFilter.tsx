@@ -1,4 +1,4 @@
-import { ORIGINS, type Origin } from "../../constants/origins";
+import { ORIGINS, type Origin } from "../../../constants";
 
 type OriginFilterProps = {
     activeOrigin: Origin;

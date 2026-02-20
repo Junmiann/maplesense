@@ -3,6 +3,8 @@ import pool from "./db.js";
 export async function queryClasses(params: {
     job?: string;
     origin?: string;
+    sort?: "difficulty";
+    order?: "asc" | "desc";
 }) {
     const client = await pool.connect();
     
@@ -31,6 +33,16 @@ export async function queryClasses(params: {
 
         if (conditions.length) {
             query += " WHERE " + conditions.join(" AND ");
+        }
+
+        if (params.sort == "difficulty") {
+            const allowedOrder = ["asc", "desc"];
+            const order =
+                params.order && allowedOrder.includes(params.order)
+                ? params.order
+                : "asc";
+
+            query += ` ORDER BY difficulty ${order}`;
         }
 
         const charactersResults = await client.query(query, values);

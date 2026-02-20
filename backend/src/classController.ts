@@ -6,6 +6,8 @@ export const fetchClasses = async (req: Request, res: Response) => {
     try {
         const job = req.query.job as string;
         const origin = req.query.origin as string;
+        const sort = req.query.sort as "difficulty";
+        const order = req.query.order as "asc" | "desc";
 
         if (job && origin) {
             return res.status(400).json({
@@ -13,7 +15,7 @@ export const fetchClasses = async (req: Request, res: Response) => {
             });
         }
 
-        const classes = await classService.queryClasses({job, origin});
+        const classes = await classService.queryClasses({job, origin, sort, order});
         res.status(200).json(classes);
     } catch (error) {
         console.error(error);

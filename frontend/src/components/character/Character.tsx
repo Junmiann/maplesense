@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useLocation } from "react-router-dom";
 import type { Class } from "../../types";
 import CharacterInfoCard from "./CharacterInfoCard";
 
@@ -7,6 +7,10 @@ export default function Character() {
     const { id } = useParams();
     const [character, setCharacter] = useState<Class | null>(null);
     const [loading, setLoading] = useState(true);
+
+    const location = useLocation();
+
+    const from = (location.state as any)?.from as string | undefined;
 
     useEffect(() => {
         if (!id) return;
@@ -44,7 +48,7 @@ export default function Character() {
 
     return (
         <div className="flex flex-col max-w-xl p-4 m-10 mx-auto md:max-w-4xl lg:max-w-6xl mt-28">
-            <Link to="/classes" className="flex w-8">
+            <Link to={from ?? "/classes"} className="flex w-8">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
