@@ -22,6 +22,12 @@ export default function Classes() {
     const origin = (searchParams.get("origin") as Origin) || "explorer";
     const [activeFilter, setActiveFilter] = useState<FilterMode>("job");
 
+    // Keep activeFilter in sync with URL (else the filter always shows job-filter when navigating back from character page)
+    useEffect(() => {
+        if (searchParams.has("origin")) setActiveFilter("origin");
+        else setActiveFilter("job");
+    }, [searchParams]);
+
     const sort = searchParams.get("sort");
     const order = searchParams.get("order");
 
@@ -44,14 +50,15 @@ export default function Classes() {
             });
         }
     };
-
+    
+    // Updates the URL to apply either job/origin-filter
+    // Clears the other filter to ensure only one filter type is active
     const setJob = (nextJob: Job) => {
         updateSearchParams({
             origin: null,
             job: nextJob === "all" ? null : nextJob
         });
     };
-
     const setOrigin = (nextOrigin: Origin) => {
         updateSearchParams({ 
             job: null,
