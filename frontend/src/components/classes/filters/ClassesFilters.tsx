@@ -25,7 +25,7 @@ export default function ClassesFilters({activeFilter, onSwitch, job, setJob, ori
 
     return (
         <>
-            <div className="flex justify-end gap-6 border-b border-white/20">
+            <div className="flex justify-end gap-6 border-b border-white/20 mt-4 md:mt-0">
                 <button onClick={() => onSwitch("job")} className={tabClass(activeFilter === "job")}>Jobs</button>
                 <button onClick={() => onSwitch("origin")} className={tabClass(activeFilter === "origin")}>Origin</button>
             </div>

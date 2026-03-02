@@ -17,7 +17,7 @@ export default function JobsFilter({
                     onClick={() => onChange(job)}
                     className={`pb-2 mr-6 transition
                         ${activeJob === job
-                            ? "font-bold border-b-2 border-white"
+                            ? "font-bold md:border-b-2 border-white"
                             : "text-white/60 hover:text-[#B1E1E9] hover:font-bold"
                         }`}>
                             {job.toUpperCase()}

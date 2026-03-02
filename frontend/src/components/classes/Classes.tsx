@@ -90,7 +90,7 @@ export default function Classes() {
   fetchClasses();
 }, [searchParams]);
     return (
-        <div className="w-[90%] flex flex-col max-w-xl mx-auto mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
+        <div className="w-[90%] flex flex-col max-w-xl mx-auto md:mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
             <h1 className="text-center uppercase md:text-start">Classes</h1>
 
             <ClassesFilters
