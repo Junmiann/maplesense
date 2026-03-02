@@ -66,13 +66,20 @@ export default function Classes() {
         });
     };
 
+    // Updates the URL search parameters
+    // string: set/update parameter | null: remove parameter
     const updateSearchParams = (patch: Record<string, string | null>) => {
-        setSearchParams((prev) => {
-        const next = new URLSearchParams(prev);
+        // Get and clone current search params (to avoid mutating)
+        setSearchParams((current) => {
+        const next = new URLSearchParams(current);
 
+        // Loop through new updates
         for (const [key, value] of Object.entries(patch)) {
-            if (value === null) next.delete(key);
-            else next.set(key, value);
+            if (value === null) {
+                next.delete(key);
+            } else {
+                next.set(key, value);
+            }
         }
 
         return next;
