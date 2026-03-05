@@ -75,11 +75,16 @@ export default function Classes() {
 
     useEffect(() => {
         const fetchClasses = async () => {
-        const url = newUrl(searchParams);
-        const response = await fetch(url);
-        const data = await response.json();
-        setClasses(data);
-    };
+            try {
+                const url = newUrl(searchParams);
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Failed to fetch classes");
+                const data = await response.json();
+                setClasses(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
     fetchClasses();
     }, [searchParams]);
