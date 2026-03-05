@@ -13,7 +13,7 @@ export default function StatBar({ value }: StatBarProps) {
         return (
           <div
             key={i}
-            className={`h-6 w-10 rounded-tl-[12px] rounded-br-[12px] rounded-tr-[6px] rounded-bl-[6px] transition-all border-2
+            className={`h-6 w-2 xs:w-10 rounded-tl-[12px] rounded-br-[12px] rounded-tr-[6px] rounded-bl-[6px] transition-all border-2
               ${filled 
                 ? "bg-gradient-to-t from-[#8EB3BE] to-[#F5F7FA]"
                 : " border-white/40 bg-transparent"

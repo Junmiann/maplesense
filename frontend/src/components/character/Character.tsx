@@ -47,7 +47,7 @@ export default function Character() {
     }
 
     return (
-        <div className="flex flex-col max-w-xl p-4 m-10 md:mt-16 mx-auto md:max-w-4xl lg:max-w-6xl mt-28">
+        <div className="flex flex-col max-w-xl p-4 m-10 mx-auto md:mt-16 md:max-w-4xl lg:max-w-6xl sm:mt-28">
             <Link to={from ?? "/classes"} className="flex w-8">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -56,7 +56,10 @@ export default function Character() {
             
             <div className="items-start gap-4 mt-4 md:flex justify-evenly text-start">
                 <CharacterInfoCard character={character} />
-                <img src={character.image_url} alt={character.name} className="mx-auto md:my-auto md:w-2/5 drop-shadow-[8px_6px_4px_#22242B] h-auto self-start object-contain"/>
+                <img 
+                    src={character.image_url} alt={character.name} 
+                    className="mx-auto mt-10 md:my-auto md:w-2/5 drop-shadow-[8px_6px_4px_#22242B] h-auto self-start object-contain"
+                />
             </div>
         </div>
     );

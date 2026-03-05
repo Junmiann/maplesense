@@ -16,12 +16,16 @@ export default function CharacterInfoCard({character}: Props) {
                 {/* Weapons info */}
                 <div className="flex flex-col gap-4 mb-2 w-lg">
                     <div>
-                        <p className="ml-6 font-semibold uppercase">Primary weapon</p>
-                        <p className="p-2 text-sm border-2 rounded-full border-white/30 bg-[#8EB3BE]/10">{character.primary_weapon.join(", ")}</p>
+                        <p className="font-semibold uppercase">Primary weapon</p>
+                        <div className="p-2 border-2 rounded-full border-white/30 bg-[#8EB3BE]/10">
+                            <p className="ml-4 text-xs sm:text-sm">{character.primary_weapon.join(", ")}</p>
+                        </div>
                     </div>
                     <div>
-                        <p className="ml-6 font-semibold uppercase">Secondary weapon</p>
-                        <p className="p-2 text-sm border-2 rounded-full border-white/30 bg-[#8EB3BE]/10">{character.secondary_weapon.join(", ")}</p>
+                        <p className="font-semibold uppercase">Secondary weapon</p>
+                        <div className="p-2 border-2 rounded-full border-white/30 bg-[#8EB3BE]/10">
+                            <p className="ml-4 text-xs sm:text-sm">{character.secondary_weapon.join(", ")}</p>
+                        </div>
                     </div>
                 </div>
 
