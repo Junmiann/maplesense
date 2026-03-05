@@ -33,34 +33,24 @@ export default function Classes() {
     const sort = searchParams.get("sort");
     const order = searchParams.get("order");
     
-    const handleFilterSwitch = (filter: FilterMode) => {
-        setActiveFilter(filter);
+    // Applies either job/origin-filter and updates the URL
+    const applyFilter = (filter: FilterMode, value?: Job | Origin) => {
+        const patch: Record<string, string | null> = {};
+
         if (filter === "job") {
-            updateSearchParams({
-                origin: null,
-                job: null
-            });
+            patch.job = value && value !== "all" 
+            ? (value as Job) 
+            : null;
+            patch.origin = null;
         } else {
-            updateSearchParams({
-                job: null,
-                origin: "explorer"
-            });
+            patch.origin = value 
+            ? (value as Origin) 
+            : "explorer";
+            patch.job = null;
         }
-    };
-    
-    // Updates the URL to apply either job/origin-filter
-    // Clears the other filter to ensure only one filter type is active
-    const setJob = (nextJob: Job) => {
-        updateSearchParams({
-            origin: null,
-            job: nextJob === "all" ? null : nextJob
-        });
-    };
-    const setOrigin = (nextOrigin: Origin) => {
-        updateSearchParams({ 
-            job: null,
-            origin: nextOrigin
-        });
+
+        setActiveFilter(filter);
+        updateSearchParams(patch);
     };
 
     // Updates the URL search parameters
@@ -99,11 +89,11 @@ export default function Classes() {
 
             <ClassesFilters
                 activeFilter={activeFilter}
-                onSwitch={handleFilterSwitch}
+                onSwitch={(filter) => applyFilter(filter)}
                 job={job}
-                setJob={setJob}
+                setJob={(job) => applyFilter("job", job)}
                 origin={origin}
-                setOrigin={setOrigin}
+                setOrigin={(origin) => applyFilter("origin", origin)}
             />
 
             {/* Sort-element */}
