@@ -22,6 +22,8 @@ export default function Classes() {
     const origin = (searchParams.get("origin") as Origin) || "explorer";
     const [activeFilter, setActiveFilter] = useState<FilterMode>("job");
 
+    const [showSort, setShowSort] = useState<boolean>(false);
+
     // Keep activeFilter in sync with URL (else the filter always shows job-filter when navigating back from character page)
     useEffect(() => {
         if (searchParams.has("origin")) setActiveFilter("origin");
@@ -30,11 +32,6 @@ export default function Classes() {
 
     const sort = searchParams.get("sort");
     const order = searchParams.get("order");
-
-    const sortOrder: "asc" | "desc" | "none" = 
-        sort === "difficulty" && (order === "asc" || order === "desc") 
-        ? order 
-        : "none";
     
     const handleFilterSwitch = (filter: FilterMode) => {
         setActiveFilter(filter);
@@ -94,8 +91,8 @@ export default function Classes() {
         setClasses(data);
     };
 
-  fetchClasses();
-}, [searchParams]);
+    fetchClasses();
+    }, [searchParams]);
     return (
         <div className="w-[90%] flex flex-col max-w-xl mx-auto md:mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
             <h1 className="text-center uppercase md:text-start">Classes</h1>
@@ -111,23 +108,47 @@ export default function Classes() {
 
             {/* Sort-element */}
             <div className="flex justify-end mb-4">
-                <select
-                    value={sortOrder}
-                    onChange={(e) => {
-                        const next = e.target.value as "asc" | "desc" | "none";
+                <button
+                    className="px-2 py-2"
+                    onClick={() => setShowSort(!showSort)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 hover:text-[#b1e1e9]">
+                        <path d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+                    </svg>
+                </button>
+                
+                {showSort && (
+                    <div className="absolute mt-10 w-40 border rounded-md bg-[#1e1e1e] border-white/20 z-50 text-sm" role="menu">
+                        <button
+                            className="block w-full px-3 py-2 text-left hover:bg-white/10"
+                            onClick={() => {
+                                updateSearchParams({ sort: null, order: null });
+                                setShowSort(false);
+                            }}> Standard order
+                        </button>
 
-                        if (next === "none") {
-                        updateSearchParams({ sort: null, order: null });
-                        } else {
-                        updateSearchParams({ sort: "difficulty", order: next });
-                        }
-                    }}
-                    className="px-3 py-1 text-sm border rounded-md bg-white/10 border-white/20"
-                    >
-                        <option value="none" className="text-[#2b2b2b]">Sort by Difficulty</option>
-                        <option value="asc" className="text-[#2b2b2b]">Low to High</option>
-                        <option value="desc" className="text-[#2b2b2b]">High to Low</option>
-                    </select>
+                        <button
+                            className={`block w-full px-3 py-2 text-left ${
+                                sort === "difficulty" && order === "asc" 
+                                ? "bg-[#4f7e86] text-white" 
+                                : "hover:bg-white/10"}`}
+                            onClick={() => {
+                                updateSearchParams({ sort: "difficulty", order: "asc" });
+                                setShowSort(false);
+                            }}> Difficulty: Low to High
+                        </button>
+
+                        <button
+                            className={`block w-full px-3 py-2 text-left ${
+                                sort === "difficulty" && order === "desc" 
+                                ? "bg-[#4f7e86] text-white" 
+                                : "hover:bg-white/10"}`}
+                            onClick={() => {
+                                updateSearchParams({ sort: "difficulty", order: "desc" });
+                                setShowSort(false);
+                            }}> Difficulty: High to Low
+                        </button>
+                    </div>
+                )}
             </div>
             
             {/* Classes list */}
