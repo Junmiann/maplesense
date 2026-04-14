@@ -32,6 +32,7 @@ export default function Classes() {
 
     const sort = searchParams.get("sort");
     const order = searchParams.get("order");
+    const isSortActive = sort !== null;
     
     // Applies either job/origin-filter and updates the URL
     const applyFilter = (filter: FilterMode, value?: Job | Origin) => {
@@ -106,7 +107,9 @@ export default function Classes() {
                 <button
                     className="px-2 py-2"
                     onClick={() => setShowSort(!showSort)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6 hover:text-[#b1e1e9]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill={isSortActive ? "white" : "none"} 
+                        className={`size-6 hover:text-[#b1e1e9] ${isSortActive ? "text-[#4f7e86]" : "" }`}
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
                         <path d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
                     </svg>
                 </button>
