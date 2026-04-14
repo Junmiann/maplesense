@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useSearchParams, useLocation } from "react-router-dom";
 import type { Class } from "../../types";
 import type { Job, Origin } from "../../constants";
 import ClassesFilters from "./filters/ClassesFilters";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 type FilterMode = "job" | "origin";
 
@@ -23,6 +24,8 @@ export default function Classes() {
     const [activeFilter, setActiveFilter] = useState<FilterMode>("job");
 
     const [showSort, setShowSort] = useState<boolean>(false);
+    const sortRef = useRef<HTMLDivElement | null>(null);
+    useClickOutside(sortRef, () => setShowSort(false));
 
     // Keep activeFilter in sync with URL (else the filter always shows job-filter when navigating back from character page)
     useEffect(() => {
@@ -87,8 +90,9 @@ export default function Classes() {
             }
         };
 
-    fetchClasses();
+        fetchClasses();
     }, [searchParams]);
+
     return (
         <div className="w-[90%] flex flex-col max-w-xl mx-auto md:mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
             <h1 className="text-center uppercase md:text-start">Classes</h1>
@@ -103,7 +107,7 @@ export default function Classes() {
             />
 
             {/* Sort-element */}
-            <div className="flex justify-end mb-4">
+            <div ref={sortRef} className="flex justify-end mb-4">
                 <button
                     className="px-2 py-2"
                     onClick={() => setShowSort(!showSort)}>
