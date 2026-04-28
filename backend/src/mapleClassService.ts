@@ -1,5 +1,5 @@
 import pool from "./db.js";
-import { buildClassQuery } from "./classQueryBuilder.js";
+import { buildClassQuery } from "./queryBuilder.js";
 
 export async function queryClasses(params: {
     job?: string;
@@ -18,14 +18,14 @@ export async function queryClasses(params: {
     }
 }
 
-export async function selectedCharacter(charId: number) {
+export async function getCharacterId(charId: number) {
     const client = await pool.connect();
 
     try {
-        const selectedCharacterResult = await client.query("SELECT * FROM classes WHERE id = $1", 
+        const getCharacterIdResult = await client.query("SELECT * FROM classes WHERE id = $1", 
             [charId]);
 
-        return selectedCharacterResult.rows;
+        return getCharacterIdResult.rows;
     } finally {
         client.release();
     }

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import * as classService from "./classService.js";
+import * as classService from "./mapleClassService.js";
 
 // GET /classes
 export const fetchClasses = async (req: Request, res: Response) => {
@@ -36,7 +36,7 @@ export const fetchCharacter = async (req: Request, res: Response) => {
             return res.status(400).json({ error: "Invalid character ID" });
         }
 
-        const character = await classService.selectedCharacter(charId);
+        const character = await classService.getCharacterId(charId);
         res.status(200).json(character);
     } catch (error) {
         console.error(error);

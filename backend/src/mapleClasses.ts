@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as classController from "./classController.js";
+import * as classController from "./mapleClassController.js";
 
 const router = Router();
 
