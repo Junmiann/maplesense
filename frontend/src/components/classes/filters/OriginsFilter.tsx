@@ -10,7 +10,7 @@ export default function OriginFilter({
     onChange,
 }: OriginFilterProps) {
     return (
-        <div className="border-b border-white/20">
+        <div className="border-b border-[#718088]/20">
             {ORIGINS.map((origin) => (
                 <button 
                     key={origin}
@@ -18,7 +18,7 @@ export default function OriginFilter({
                     className={`pb-2 mr-6 transition
                         ${activeOrigin === origin
                             ? "font-semibold"
-                            : "text-white/60 hover:text-[#B1E1E9] hover:font-bold"
+                            : "text-[#adb6bb] hover:text-[#B1E1E9] hover:font-bold"
                         }`}>
                             {origin.toLocaleUpperCase()}
                     </button>

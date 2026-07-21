@@ -19,13 +19,13 @@ export default function ClassesFilters({activeFilter, onSwitch, job, setJob, ori
     const tabClass = (isActive: boolean) =>
         `pb-2 transition ${
             isActive
-            ? "font-semibold border-b-2 border-white"
-            : "text-white/60 hover:text-[#B1E1E9] hover:font-bold"
+            ? "font-semibold border-b-2 border-[#718088]"
+            : "text-[#adb6bb] hover:text-[#B1E1E9] hover:font-bold"
         }`;
 
     return (
         <>
-            <div className="flex justify-end gap-6 border-b border-white/20 mt-4 md:mt-0">
+            <div className="flex justify-end gap-6 border-b border-[#718088]/20 mt-4 md:mt-0">
                 <button onClick={() => onSwitch("job")} className={tabClass(activeFilter === "job")}>Jobs</button>
                 <button onClick={() => onSwitch("origin")} className={tabClass(activeFilter === "origin")}>Origin</button>
             </div>

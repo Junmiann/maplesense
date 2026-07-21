@@ -94,7 +94,7 @@ export default function Classes() {
     }, [searchParams]);
 
     return (
-        <div className="w-[90%] flex flex-col max-w-xl mx-auto md:mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
+        <div className="w-[90%] flex flex-col max-w-xl mx-auto mt-8 md:mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
             <h1 className="text-center uppercase md:text-start">Classes</h1>
 
             <ClassesFilters
@@ -119,7 +119,7 @@ export default function Classes() {
                 </button>
                 
                 {showSort && (
-                    <div className="absolute mt-10 w-40 border rounded-md bg-[#1e1e1e] border-white/20 z-50 text-sm" role="menu">
+                    <div className="absolute mt-10 w-40 border rounded-md bg-[#1e1e1e] border-[#718088]/20 z-50 text-sm" role="menu">
                         <button
                             className="block w-full px-3 py-2 text-left hover:bg-white/10"
                             onClick={() => {
@@ -160,10 +160,10 @@ export default function Classes() {
                         key={cls.id}
                         to={`/classes/${cls.id}`}
                         state={{ from: `${location.pathname}${location.search}` }}
-                        className="flex flex-col items-center gap-2 transition border rounded-lg lg:p-4 group border-white/5 bg-white/5">
+                        className="flex flex-col items-center gap-2 transition border rounded-lg lg:p-4 group border-[#718088]/5 bg-[#718088]/10">
                             <img src={cls.image_url} alt={cls.name} 
                                 className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#B1E1E9]"/>
-                            <p className="text-sm border-t md:text-base lg:text-lg border-white/20">{cls.name}</p> 
+                            <p className="text-sm border-t md:text-base lg:text-lg border-[#718088]/20">{cls.name}</p> 
                     </Link>
                 ))}
             </div>

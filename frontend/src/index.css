@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  margin: 0 auto;
   text-align: center;
   font-family: "Amiko", sans-serif;
-  color: #ffffffde;
-  background-image: url("../src/assets/arcane-river-road-of-vanishing.jpg");
+  color: #718088;
+  background-image: url("../src/assets/bg.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  background-color: #1e282e80;
   background-blend-mode: overlay;
+  background-color: #dde7eb;
 }
 
-p {
-  color: #F5F7FA;
+body {
+  margin: 0 auto;
+  min-width: 320px;
 }
 
 a {
@@ -26,12 +26,6 @@ a {
 a:hover {
   color: #b1e1e9;
   font-weight: bold;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
