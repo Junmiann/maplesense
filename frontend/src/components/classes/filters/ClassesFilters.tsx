@@ -20,7 +20,7 @@ export default function ClassesFilters({activeFilter, onSwitch, job, setJob, ori
         `pb-2 transition ${
             isActive
             ? "font-semibold border-b-2 border-[#718088]"
-            : "text-[#adb6bb] hover:text-[#B1E1E9] hover:font-bold"
+            : "text-[#adb6bb] hover:text-[#ffae6e] hover:font-bold"
         }`;
 
     return (

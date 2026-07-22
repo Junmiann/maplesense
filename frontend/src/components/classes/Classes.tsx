@@ -111,15 +111,15 @@ export default function Classes() {
                 <button
                     className="px-2 py-2"
                     onClick={() => setShowSort(!showSort)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill={isSortActive ? "white" : "none"} 
-                        className={`size-6 hover:text-[#b1e1e9] ${isSortActive ? "text-[#4f7e86]" : "" }`}
-                        viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill={isSortActive ? "#ffae6e" : "none"} 
+                        className={`size-6 hover:text-[#ffae6e] transition duration-150 ${isSortActive ? "text-[#d98652]" : "" }`}
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
                     </svg>
                 </button>
                 
                 {showSort && (
-                    <div className="absolute mt-10 w-40 border rounded-md bg-[#1e1e1e] border-[#718088]/20 z-50 text-sm" role="menu">
+                    <div className="absolute mt-10 w-40 border rounded-md bg-[#1e1e1e] border-[#718088]/20 z-50 text-sm text-white" role="menu">
                         <button
                             className="block w-full px-3 py-2 text-left hover:bg-white/10"
                             onClick={() => {
@@ -131,7 +131,7 @@ export default function Classes() {
                         <button
                             className={`block w-full px-3 py-2 text-left ${
                                 sort === "difficulty" && order === "asc" 
-                                ? "bg-[#4f7e86] text-white" 
+                                ? "bg-[#ffae6e] text-white" 
                                 : "hover:bg-white/10"}`}
                             onClick={() => {
                                 updateSearchParams({ sort: "difficulty", order: "asc" });
@@ -142,7 +142,7 @@ export default function Classes() {
                         <button
                             className={`block w-full px-3 py-2 text-left ${
                                 sort === "difficulty" && order === "desc" 
-                                ? "bg-[#4f7e86] text-white" 
+                                ? "bg-[#ffae6e] text-white" 
                                 : "hover:bg-white/10"}`}
                             onClick={() => {
                                 updateSearchParams({ sort: "difficulty", order: "desc" });
@@ -162,7 +162,7 @@ export default function Classes() {
                         state={{ from: `${location.pathname}${location.search}` }}
                         className="flex flex-col items-center gap-2 transition border rounded-lg lg:p-4 group border-[#718088]/5 bg-[#718088]/10">
                             <img src={cls.image_url} alt={cls.name} 
-                                className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#B1E1E9]"/>
+                                className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#ffae6e]"/>
                             <p className="text-sm border-t md:text-base lg:text-lg border-[#718088]/20">{cls.name}</p> 
                     </Link>
                 ))}

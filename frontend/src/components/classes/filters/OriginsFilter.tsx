@@ -18,7 +18,7 @@ export default function OriginFilter({
                     className={`pb-2 mr-6 transition
                         ${activeOrigin === origin
                             ? "font-semibold"
-                            : "text-[#adb6bb] hover:text-[#B1E1E9] hover:font-bold"
+                            : "text-[#adb6bb] hover:text-[#ffae6e] hover:font-bold"
                         }`}>
                             {origin.toLocaleUpperCase()}
                     </button>
