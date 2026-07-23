@@ -48,18 +48,18 @@ export default function Character() {
     }
 
     return (
-        <div className="flex flex-col justify-center max-w-xl mx-auto md:max-w-4xl lg:max-w-6xl">
+        <div className="flex flex-col justify-center mx-auto max-w-full md:p-10">
             <Link to={from ?? "/classes"} className="flex w-12 pl-4 md:p-0">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </Link>
             
-            <div className="items-start p-4 mt-4 md:p-0 md:pt-10 md:flex text-start">
+            <div className="items-start p-4 md:p-0 md:flex text-start">
                 <CharacterInfoCard character={character} />
                 <img 
                     src={character.image_url} alt={character.name} 
-                    className="mx-auto mt-10 md:my-auto md:w-3/5"
+                    className="mx-auto mt-10 md:my-auto md:p-5"
                 />
                 <CharacterTraits character={character} />
             </div>
