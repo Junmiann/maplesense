@@ -11,15 +11,20 @@ export const fetchClasses = async (req: Request, res: Response) => {
 
         if (job && origin) {
             return res.status(400).json({
-                error: "Cannot use both job and origin."
+                error: "Cannot use both job and origin filters at the same time"
             });
         }
 
         const classes = await classService.queryClasses({job, origin, sort, order});
+
         res.status(200).json(classes);
+
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+
+        res.status(500).json({ 
+            error: "Database error" 
+        });
     }
 };
 
@@ -28,18 +33,27 @@ export const fetchCharacter = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         if (!id) {
-            return res.status(400).json({ error: "Missing character ID" });
+            return res.status(400).json({ 
+                error: "Missing character ID" 
+            });
         }
 
         const charId = parseInt(id);
         if (isNaN(charId)) {
-            return res.status(400).json({ error: "Invalid character ID" });
+            return res.status(400).json({ 
+                error: "Invalid character ID" 
+            });
         }
 
         const character = await classService.getCharacterId(charId);
+
         res.status(200).json(character);
+
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Database error" });
+        
+        res.status(500).json({ 
+            error: "Database error" 
+        });
     }
 };

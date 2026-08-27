@@ -11,7 +11,12 @@ export async function queryClasses(params: {
     
     try {
         const { query, values } = buildClassQuery(params);
-        const charactersResults = await client.query(query, values);
+
+        const charactersResults = await client.query(
+            query, 
+            values
+        );
+
         return charactersResults.rows;
     } finally {
         client.release();
@@ -22,8 +27,10 @@ export async function getCharacterId(charId: number) {
     const client = await pool.connect();
 
     try {
-        const getCharacterIdResult = await client.query("SELECT * FROM classes WHERE id = $1", 
-            [charId]);
+        const getCharacterIdResult = await client.query(
+            "SELECT * FROM classes WHERE id = $1", 
+            [charId]
+        );
 
         return getCharacterIdResult.rows;
     } finally {
