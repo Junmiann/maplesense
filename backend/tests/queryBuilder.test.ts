@@ -10,4 +10,16 @@ describe ("buildQueryClass", () => {
             values: [],
         });
     });
+
+    it("returns the correct query and value when a job is provided", () => {
+        const result = buildClassQuery({ job: "Warrior" });
+
+        expect(result).toEqual({
+            query: `SELECT * FROM classes WHERE EXISTS (
+            SELECT 1
+            FROM unnest(classes.job) AS x
+            WHERE LOWER(x) = LOWER($1))`,
+            values: ["Warrior"],
+        });
+    });
 });
