@@ -1,12 +1,8 @@
 import pool from "./db.js";
 import { buildClassQuery } from "./queryBuilder.js";
+import type { ClassQueryParams } from "./types/class.js";
 
-export async function queryClasses(params: {
-    job?: string;
-    origin?: string;
-    sort?: "difficulty";
-    order?: "asc" | "desc";
-}) {
+export async function queryClasses(params: ClassQueryParams) {
     const client = await pool.connect();
     
     try {

@@ -10,3 +10,10 @@ export interface Class {
     range: 1 | 2 | 3 | 4 | 5;
     image_url: string;
 }
+
+export interface ClassQueryParams {
+    job?: string;
+    origin?: string;
+    sort?: "difficulty";
+    order?: "asc" | "desc";
+}

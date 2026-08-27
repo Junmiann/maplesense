@@ -15,7 +15,12 @@ export const fetchClasses = async (req: Request, res: Response) => {
             });
         }
 
-        const classes = await classService.queryClasses({job, origin, sort, order});
+        const classes = await classService.queryClasses({
+            job, 
+            origin, 
+            sort, 
+            order
+        });
 
         res.status(200).json(classes);
 
@@ -38,7 +43,7 @@ export const fetchCharacter = async (req: Request, res: Response) => {
             });
         }
 
-        const charId = parseInt(id);
+        const charId = Number(id);
         if (isNaN(charId)) {
             return res.status(400).json({ 
                 error: "Invalid character ID" 
@@ -51,7 +56,7 @@ export const fetchCharacter = async (req: Request, res: Response) => {
 
     } catch (error) {
         console.error(error);
-        
+
         res.status(500).json({ 
             error: "Database error" 
         });

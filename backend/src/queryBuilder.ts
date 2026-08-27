@@ -1,9 +1,6 @@
-export function buildClassQuery(params: {
-    job?: string;
-    origin?: string;
-    sort?: "difficulty";
-    order?: "asc" | "desc";
-}) {
+import type { ClassQueryParams } from "./types/class.js";
+
+export function buildClassQuery(params: ClassQueryParams) {
     let query = "SELECT * FROM classes";
     const conditions: string[] = [];
     const values: any[] = [];
