@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc && concurrently \"tsc --watch\" \"nodemon dist/server.js\"",
-    "test": "vitest"
+    "test": "vitest",
+    "createAdmin": "tsc && node dist/scripts/createAdmin.js"
   },
   "keywords": [],
   "author": "",
