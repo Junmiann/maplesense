@@ -10,3 +10,11 @@ CREATE TABLE IF NOT EXISTS classes (
     range INTEGER NOT NULL CHECK (range BETWEEN 1 AND 5),
     image_url TEXT
 );
+
+CREATE TABLE IF NOT EXISTS admins (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    must_change_password BOOLEAN NOT NULL DEFAULT true,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
