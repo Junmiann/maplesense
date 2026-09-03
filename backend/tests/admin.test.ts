@@ -1,15 +1,26 @@
 import { describe, expect, it } from "vitest";
 import { authenticateAdmin } from "../src/admin/admin.service";
+import { createTestAdmin } from "./helpers/createTestAdmin";
 
 describe("admin", () => {
-    it("should authenticate admin user", async () => {
-        const result = await authenticateAdmin("admin", "adminpassword");
+    it("should authenticate an admin with the correct password", async () => {
+        const admin = await createTestAdmin();
+
+        const result = await authenticateAdmin(
+            admin.username,
+            admin.password
+        );
 
         expect(result).toBe(true);
     });
 
     it("should reject invalid password", async () => {
-        const result = await authenticateAdmin("admin", "wrongpassword");
+        const admin = await createTestAdmin();
+
+        const result = await authenticateAdmin(
+            admin.username,
+            "password"
+        );
 
         expect(result).toBe(false);
     });
