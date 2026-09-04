@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import classesRouter from "./mapleClass/mapleClasses.js";
+import adminRouter from "./admin/admin.js";
 
 const app = express();
 const PORT = 5000;
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use("/classes", classesRouter);
+app.use("/admin", adminRouter);
 
 app.listen(PORT, HOST, () => {
   console.log(`The server is on: http://localhost:${PORT}`);

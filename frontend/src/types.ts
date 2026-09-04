@@ -10,3 +10,9 @@ export interface Class {
     range: 1 | 2 | 3 | 4 | 5;
     image_url: string;
 }
+
+export type Admin = {
+    id: number;
+    username: string;
+    password_hash: string;
+};
