@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { buildClassQuery } from "../src/queryBuilder.js";
+import { buildMapleClassQuery } from "../src/mapleClass/mapleClassQueryBuilder.js";
 
 describe ("buildQueryClass", () => {
     it("returns all maplestory classes if no params are provided", () => {
-        const result = buildClassQuery({});
+        const result = buildMapleClassQuery({});
 
         expect(result).toEqual({
             query: "SELECT * FROM classes",
@@ -12,7 +12,7 @@ describe ("buildQueryClass", () => {
     });
 
     it("returns the correct query and value when a job is provided", () => {
-        const result = buildClassQuery({ job: "Warrior" });
+        const result = buildMapleClassQuery({ job: "Warrior" });
 
         expect(result).toEqual({
             query: `SELECT * FROM classes WHERE EXISTS (

@@ -1,6 +1,6 @@
-import type { ClassQueryParams } from "./types/class.js";
+import type { ClassQueryParams } from "../types/class.js";
 
-export function buildClassQuery(params: ClassQueryParams) {
+export function buildMapleClassQuery(params: ClassQueryParams) {
     let query = "SELECT * FROM classes";
     const conditions: string[] = [];
     const values: any[] = [];

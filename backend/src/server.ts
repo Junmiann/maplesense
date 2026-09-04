@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import classesRouter from "./mapleClasses.js";
+import classesRouter from "./mapleClass/mapleClasses.js";
 
 const app = express();
 const PORT = 5000;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { authenticateAdmin } from "../src/admin/admin.service";
-import { createTestAdmin } from "./helpers/createTestAdmin";
+import { authenticateAdmin } from "../src/admin/adminService.js";
+import { createTestAdmin } from "./helpers/createTestAdmin.js";
 
 describe("admin", () => {
     it("should authenticate an admin with the correct password", async () => {
