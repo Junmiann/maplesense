@@ -20,15 +20,6 @@ export async function authenticateAdmin (username: string, password: string) {
     };
 };
 
-export async function checkPassword(admin: Admin, password: string) {
-    const passwordIsValid = await bcrypt.compare(
-        password,
-        admin.password_hash
-    );
-
-    return passwordIsValid;
-};
-
 export async function getAdminByUsername(username:string) {
     try {
         const adminExists = await pool.query(
@@ -48,4 +39,13 @@ export async function getAdminByUsername(username:string) {
     } catch {
         throw new Error("Can't find an admin with this username.");
     };
+};
+
+export async function checkPassword(admin: Admin, password: string) {
+    const passwordIsValid = await bcrypt.compare(
+        password,
+        admin.password_hash
+    );
+
+    return passwordIsValid;
 };
