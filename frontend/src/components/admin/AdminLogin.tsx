@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminLogin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     async function handleLogin(event: React.FormEvent) {
         event.preventDefault();
@@ -21,6 +23,12 @@ export default function AdminLogin() {
         const data = await response.json();
 
         console.log(data);
+
+        if (data.success) {
+            navigate("/admin/dashboard");
+        } else {
+            alert("Invalid username or password");
+        };
     };
 
     return (

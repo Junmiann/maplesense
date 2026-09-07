@@ -8,11 +8,13 @@ export async function login(req: Request, res: Response) {
 
     if (!isAuthorized) {
         return res.status(401).json({ 
-            message: "Invalid credentials"
+            message: "Invalid credentials",
+            success: false
         });
     };
 
     return res.status(200).json({
-        message: "Login successful"
+        message: "Login successful",
+        success: true
     });
 };
