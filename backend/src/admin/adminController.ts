@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { authenticateAdmin } from './adminService.js';
+import { generateToken } from './authToken.js';
 
 export async function login(req: Request, res: Response) {
     const { username, password } = req.body;
@@ -13,8 +14,11 @@ export async function login(req: Request, res: Response) {
         });
     };
 
+    const token = generateToken(username);
+
     return res.status(200).json({
         message: "Login successful",
-        success: true
+        success: true,
+        token
     });
 };

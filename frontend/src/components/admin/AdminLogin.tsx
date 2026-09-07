@@ -25,6 +25,9 @@ export default function AdminLogin() {
         console.log(data);
 
         if (data.success) {
+            localStorage.setItem("adminToken", data.token);
+            setUsername('')
+            setPassword('')
             navigate("/admin/dashboard");
         } else {
             alert("Invalid username or password");
