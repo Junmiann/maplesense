@@ -35,13 +35,23 @@ export default function AdminLogin() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleLogin}>
+        <div className="flex m-auto max-w-[100vh] h-[calc(88vh-3rem)] items-center justify-between">
+            <img src="../../src/assets/maplestory-mushroom.webp" 
+                alt="maplestory mushroom"
+                draggable="false"
+                className="w-[36vh]"
+            />
+            <form 
+                onSubmit={handleLogin} 
+                className="flex flex-col gap-4 p-8 my-auto w-[56vh] bg-[#C0C9CF80] rounded-md"
+            >
+                <h1>Login</h1>
                 <input 
                     type="text"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
                     placeholder="Username"
+                    className="p-4 rounded-md text-[#000]"
                 />
 
                 <input 
@@ -49,9 +59,13 @@ export default function AdminLogin() {
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     placeholder="Password"
+                    className="p-4 rounded-md text-[#000]"
                 />
 
-                <button type="submit">
+                <button 
+                    type="submit"
+                    className="p-4 transition duration-300 delay-100 bg-[#ffae6e] rounded-md hover:bg-[#ffc250] text-[#fff]"
+                >
                     Login
                 </button>
             </form>
