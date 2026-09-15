@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { authenticateAdmin } from './adminService.js';
-import { generateToken } from './authToken.js';
+import { authenticateAdmin } from './auth/authService.js';
+import { generateToken } from './auth/authToken.js';
 
 export async function login(req: Request, res: Response) {
     const { username, password } = req.body;

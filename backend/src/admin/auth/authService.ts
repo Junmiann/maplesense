@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
-import pool from "../db.js";
-import type { Admin } from "../types/admin.js";
+import pool from "../../db.js";
+import type { Admin } from "../../types/admin.js";
 
 export async function authenticateAdmin (username: string, password: string) {
     try {
