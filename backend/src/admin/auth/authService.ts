@@ -49,3 +49,28 @@ export async function checkPassword(admin: Admin, password: string) {
 
     return passwordIsValid;
 };
+
+export async function updateAdminPassword(adminId: string, newPassword: string) {
+    const salt = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    await pool.query(
+        `UPDATE admins 
+        SET password_hash = $1 
+            AND must_change_password = false
+            AND updated_at = NOW()
+        WHERE id = $2`,
+        [hashedPassword, adminId]
+    );
+};
+
+export async function checkIfAdminMustChangePassword(adminId: string) {
+    const admin = await pool.query(
+        `SELECT must_change_password 
+        FROM admins 
+        WHERE id=$1`,
+        [adminId]
+    );
+
+    return admin.rows[0].must_change_password;
+};

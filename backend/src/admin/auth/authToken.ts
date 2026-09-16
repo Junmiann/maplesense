@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export function generateToken(admin: string) {
-    const adminId = admin[0];
-
+export function generateToken(adminId: string) {
     const JWT_SECRET = process.env.JWT_SECRET;
 
     return jwt.sign(
@@ -10,4 +8,11 @@ export function generateToken(admin: string) {
         JWT_SECRET!,
         { expiresIn: '1h' }
     );
+};
+
+export function verifyToken(token: string) {
+    return jwt.verify(
+        token, 
+        process.env.JWT_SECRET!
+    ) as { adminId: string };
 };
