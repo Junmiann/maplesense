@@ -5,18 +5,16 @@ import { generateToken, verifyToken } from './auth/authToken.js';
 export async function login(req: Request, res: Response) {
     const { username, password } = req.body;
 
-    const isAuthorized = await authenticateAdmin(username, password);
+    const admin = await authenticateAdmin(username, password);
 
-    if (!isAuthorized) {
+    if (!admin) {
         return res.status(401).json({ 
             message: "Invalid credentials",
             success: false
         });
     };
 
-    const adminId = username[0];
-
-    const token = generateToken(adminId);
+    const token = generateToken(admin.id);
 
     return res.status(200).json({
         message: "Login successful",
@@ -29,6 +27,7 @@ export async function changePassword(req: Request, res: Response) {
     try {
         const token = getToken(req);
         const { adminId } = verifyToken(token);
+
         const { newPassword } = req.body;
 
         await updateAdminPassword(adminId, newPassword);
@@ -40,7 +39,7 @@ export async function changePassword(req: Request, res: Response) {
 
     } catch (error) {
         return res.status(401).json({ 
-            message: "Invalid token",
+            message: "Password change failed.",
             success: false
         });
     }

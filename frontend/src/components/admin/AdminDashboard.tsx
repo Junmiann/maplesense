@@ -1,4 +1,5 @@
 import { handleLogout } from "./auth/handleLogout";
+import { MustChangePassword } from "./auth/MustChangePassword";
 
 export default function AdminDashboard() {
     return (
@@ -6,6 +7,8 @@ export default function AdminDashboard() {
             <button type="submit" onClick={handleLogout}>
                 Logout
             </button>
+
+            <MustChangePassword />
 
             <h1>Admin Dashboard</h1>
         </div>

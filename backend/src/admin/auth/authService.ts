@@ -13,7 +13,11 @@ export async function authenticateAdmin (username: string, password: string) {
 
         const passwordIsValid = await checkPassword(admin, password);
 
-        return passwordIsValid;
+        if (!passwordIsValid) {
+            return false;
+        }
+
+        return admin;
     
     } catch {
         throw new Error("Login failed");
@@ -22,15 +26,15 @@ export async function authenticateAdmin (username: string, password: string) {
 
 export async function getAdminByUsername(username:string) {
     try {
-        const adminExists = await pool.query(
+        const adminInfo = await pool.query(
             `SELECT *
             FROM admins 
             WHERE username=$1`,
             [username]
         );
 
-        if (adminExists.rows.length > 0) {
-            const admin = adminExists.rows[0]
+        if (adminInfo.rows.length > 0) {
+            const admin = adminInfo.rows[0]
             return admin;
         }
 
@@ -56,21 +60,22 @@ export async function updateAdminPassword(adminId: string, newPassword: string) 
 
     await pool.query(
         `UPDATE admins 
-        SET password_hash = $1 
-            AND must_change_password = false
-            AND updated_at = NOW()
-        WHERE id = $2`,
+        SET password_hash=$1,
+            must_change_password=false
+        WHERE id=$2`,
         [hashedPassword, adminId]
     );
 };
 
 export async function checkIfAdminMustChangePassword(adminId: string) {
-    const admin = await pool.query(
+    const adminInfo = await pool.query(
         `SELECT must_change_password 
         FROM admins 
         WHERE id=$1`,
         [adminId]
     );
 
-    return admin.rows[0].must_change_password;
+    const admin = adminInfo.rows[0];
+
+    return admin.must_change_password;
 };

@@ -8,6 +8,7 @@ import Character from "./components/character/Character.js";
 import AdminLogin from "./components/admin/AdminLogin.js";
 import ProtectedRoute from "./components/admin/ProtectedRoute.js";
 import AdminDashboard from "./components/admin/AdminDashboard.js";
+import AdminPasswordChange from "./components/admin/AdminPasswordChange.js";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/classes" element={<Classes />} />
         <Route path="/classes/:id" element={<Character />} />
         <Route path="/admin/login" element={<AdminLogin />}/>
+        <Route path="/admin/change-password" element={<AdminPasswordChange />}/>
 
         <Route 
           path="/admin/dashboard" 
