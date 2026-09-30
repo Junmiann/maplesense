@@ -5,6 +5,7 @@ import PublicLayout from "./components/layouts/PublicLayout.js";
 import Classes from "../src/components/classes/Classes.js";
 import Character from "./components/character/Character.js";
 
+import AdminLayout from "./components/layouts/AdminLayout.js";
 import AdminLogin from "./components/admin/AdminLogin.js";
 import AdminPasswordChange from "./components/admin/AdminPasswordChange.js";
 import ProtectedRoute from "./components/admin/ProtectedRoute.js";
@@ -20,16 +21,19 @@ function App() {
           <Route path="/classes/:id" element={<Character />} />
         </Route>
 
+
         <Route path="/admin/login" element={<AdminLogin />}/>
-        <Route path="/admin/change-password" element={<AdminPasswordChange />}/>
-        <Route 
-          path="/admin/dashboard" 
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/change-password" element={<AdminPasswordChange />}/>
+          <Route 
+            path="/admin/dashboard" 
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
 
         {/* Redirect user if they try to navigate to a non-existent path */}
         <Route path="*" element={<Navigate to="/" replace />} />
