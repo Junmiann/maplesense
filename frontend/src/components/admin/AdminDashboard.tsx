@@ -5,7 +5,7 @@ export default function AdminDashboard() {
         <div className="mx-auto pt-4">
             <MustChangePassword />
 
-            <h1>Admin Dashboard</h1>
+            <h1 className="text-2xl">Admin Dashboard</h1>
         </div>
     );
 };
