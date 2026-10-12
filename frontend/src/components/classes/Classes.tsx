@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useSearchParams, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import type { Class } from "../../types";
 import type { Job, Origin } from "../../constants";
+import ClassesList from "./ClassesList";
 import ClassesFilters from "./filters/ClassesFilters";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
@@ -14,8 +15,6 @@ function newUrl(searchParams: URLSearchParams) {
 }
 
 export default function Classes() {
-    const location = useLocation();
-    
     const [classes, setClasses] = useState<Class[]>([]);
     const [searchParams, setSearchParams] = useSearchParams();
     
@@ -95,7 +94,7 @@ export default function Classes() {
 
     return (
         <div className="w-[90%] flex flex-col max-w-xl mx-auto mt-8 md:mt-20 mb-6 lg:max-w-6xl md:max-w-3xl">
-            <h1 className="text-center uppercase md:text-start">Classes</h1>
+            <h1 className="text-center uppercase md:text-start text-2xl md:text-5xl">Classes</h1>
 
             <ClassesFilters
                 activeFilter={activeFilter}
@@ -154,19 +153,7 @@ export default function Classes() {
             </div>
             
             {/* Classes list */}
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
-                {classes.map((cls) => (
-                    <Link
-                        key={cls.id}
-                        to={`/classes/${cls.id}`}
-                        state={{ from: `${location.pathname}${location.search}` }}
-                        className="flex flex-col items-center gap-2 transition border rounded-lg lg:p-4 group border-[#718088]/5 bg-[#718088]/10">
-                            <img src={cls.image_url} alt={cls.name} 
-                                className="drop-shadow-[0_6px_10px_#00000066] transition group-hover:drop-shadow-[0_5px_10px_#ffae6e]"/>
-                            <p className="text-sm border-t md:text-base lg:text-lg border-[#718088]/20">{cls.name}</p> 
-                    </Link>
-                ))}
-            </div>
+            <ClassesList classes={classes} mode="public" />
         </div>
     );
 }
