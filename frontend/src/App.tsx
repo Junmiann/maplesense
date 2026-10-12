@@ -10,7 +10,7 @@ import AdminLogin from "./components/admin/AdminLogin.js";
 import AdminPasswordChange from "./components/admin/AdminPasswordChange.js";
 import ProtectedRoute from "./components/admin/ProtectedRoute.js";
 import AdminDashboard from "./components/admin/AdminDashboard.js";
-import AdminClasses from "./components/admin/AdminClasses.js";
+import AdminClasses from "./components/admin/classes/AdminClasses.js";
 
 function App() {
   return (

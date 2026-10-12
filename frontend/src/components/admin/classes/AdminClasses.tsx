@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
-import type { Class } from "../../types";
-import ClassesList from "../classes/ClassesList";
+import type { Class } from "../../../types";
+import ClassesList from "../../classes/ClassesList";
+import CharacterModal from "./CharacterModal";
 
 export default function AdminCharacters() {
     const [classes, setClasses] = useState<Class[]>([]);
+
+    const [selectedCharacter, setSelectedCharacter] =
+        useState<Class | null>(null);
 
     useEffect(() => {
         const fetchClasses = async () => {
@@ -35,7 +39,15 @@ export default function AdminCharacters() {
             <ClassesList
                 classes={classes}
                 mode="admin"
+                onSelect={setSelectedCharacter}
             />
+
+            {selectedCharacter && (
+                <CharacterModal
+                    character={selectedCharacter}
+                    onClose={() => setSelectedCharacter(null)}
+                />
+            )}
         </div>
     );
 }
