@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { Class } from "../../../types";
+import NewCharacter from "./NewCharacter";
 import ClassesList from "../../classes/ClassesList";
 import CharacterModal from "./CharacterModal";
 
@@ -31,10 +32,12 @@ export default function AdminCharacters() {
     }, []);
 
     return (
-        <div className="w-[90%] max-w-6xl mx-auto">
-            <h1 className="text-center uppercase md:text-start text-2xl md:text-5xl py-4">
+        <div className="w-[90%] max-w-6xl mx-auto mt-8">
+            <h1 className="text-center uppercase md:text-start text-2xl md:text-5xl">
                 Manage Classes
             </h1>
+
+            <NewCharacter />
 
             <ClassesList
                 classes={classes}
